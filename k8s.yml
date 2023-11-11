@@ -25,6 +25,10 @@ spec:
         - name: order
           image: marcusantunius/order:v1
           imagePullPolicy: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: order
+
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -52,4 +56,4 @@ metadata:
   namespace: order
   name: order
 data:
-  restarantv2: "http://restaurant.restaurant"
+  restaurantv2: "http://restaurant.restaurant"
