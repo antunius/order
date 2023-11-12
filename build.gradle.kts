@@ -23,6 +23,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.1")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.10.5")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

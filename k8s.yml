@@ -10,6 +10,7 @@ metadata:
   namespace: order
   labels:
     app: order
+    color: blue
 spec:
   replicas: 1
   selector:
@@ -20,14 +21,45 @@ spec:
       name: order
       labels:
         app: order
+        color: blue
     spec:
       containers:
         - name: order
           image: marcusantunius/order:v1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           envFrom:
           - configMapRef:
-              name: order
+              name: order-blue
+
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-alb
+  namespace: order
+  labels:
+    app: order
+    color: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      name: order
+      labels:
+        app: order
+        color: green
+    spec:
+      containers:
+        - name: order
+          image: marcusantunius/order:v1
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: order-green
 
       restartPolicy: Always
 ---
@@ -54,6 +86,14 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: order
-  name: order
+  name: order-blue
 data:
   restaurantv2: "http://restaurant.restaurant"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: order
+  name: order-green
+data:
+  restaurantv2: "http://k8s-restaura-restaura-13c720b2f0-881967216.us-east-1.elb.amazonaws.com/"
