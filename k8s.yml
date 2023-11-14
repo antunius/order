@@ -100,27 +100,5 @@ metadata:
   namespace: order
   name: order-green
 data:
-  restaurantv2: "http://k8s-restaura-restaura-13c720b2f0-264929128.us-east-1.elb.amazonaws.com"
+  restaurantv2: "restaurant.13c720b2f0-1407348030.ushandsonekslabs.com"
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: order
-  namespace: order
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    alb.ingress.kubernetes.io/scheme: internet-facing
-  labels:
-    app: order
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /*
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: order
-                port:
-                  number: 80

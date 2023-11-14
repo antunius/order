@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/order")
 class OrderController(val restaurantGateway: RestaurantGatewayV2) {
     @PostMapping("v1")
-    fun createOrderv1(@RequestBody order: Order) {
-        restaurantGateway.send(order)
+    fun createOrderv1(@RequestBody order: Order): String {
+        return restaurantGateway.send(order)
     }
 }
