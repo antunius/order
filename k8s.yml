@@ -109,5 +109,5 @@ metadata:
   namespace: order
   name: order-green
 data:
-  restaurantv2: "restaurant.500494385031.realhandsonlabs.net"
+  restaurantv2: "https://restaurant.226796600291.realhandsonlabs.net"
 ---
